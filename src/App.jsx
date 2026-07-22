@@ -146,7 +146,7 @@ function AboutPage() {
     <section className="page-hero about-hero"><p className="eyebrow">О Symmetria</p><h1>Место, где<br /><em>можно быть собой.</em></h1><p>В Symmetria мы соединяем знания врача, тонкое чувство эстетики и уважение к вашей природе.</p></section>
     <section className="values"><p className="eyebrow">Наши ценности</p><div>{[['01', 'Деликатность', 'Мы выбираем решения, которые выглядят естественно и ощущаются комфортно.'], ['02', 'Экспертность', 'В нашей команде — врачи, которые постоянно совершенствуют свою практику.'], ['03', 'Диалог', 'Ваше доверие важнее быстрых результатов. Мы открыто говорим о каждом этапе.']].map(([number, title, text]) => <article key={number}><span>{number}</span><h2>{title}</h2><p>{text}</p></article>)}</div></section>
     <ClinicGallery />
-    <section className="doctor"><div className="doctor__portrait"><div /></div><div><p className="eyebrow">Основатель</p><h2>Марат<br /><em>Шарипов</em></h2><p>Основатель клиники Symmetria. Предприниматель.</p><p className="doctor__sign">Марат Шарипов<br /><small>предприниматель, основатель</small></p></div></section>
+    <section className="doctor"><div className="doctor__portrait"><div /></div><div><p className="eyebrow">Основатель</p><h2>Марат<br /><em>Шарипов</em></h2><p>«Наша цель — создавать пространство, где забота о себе становится естественной частью жизни».</p><p className="doctor__sign">Марат Шарипов<br /><small>предприниматель, основатель</small></p></div></section>
   </main>;
 }
 
