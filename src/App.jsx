@@ -21,7 +21,11 @@ function BookLink({ children, className }) {
 }
 
 function ArrowIcon() {
-  return <span className="arrow-icon" aria-hidden="true" />;
+  return (
+    <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 20 20 4M12 4h8v8" stroke="currentColor" strokeWidth="1.6" />
+    </svg>
+  );
 }
 
 function Header() {
