@@ -5,6 +5,7 @@ const navigation = [
   ['/', 'Главная'],
   ['/services', 'Услуги'],
   ['/about', 'О клинике'],
+  ['/team', 'Наша команда'],
   ['/contacts', 'Контакты'],
 ];
 
@@ -117,6 +118,59 @@ function AboutPage() {
   </main>;
 }
 
+function TeamPage() {
+  const specializations = [
+    'Лечение акне и постакне',
+    'Терапия тяжёлых форм акне системными ретиноидами',
+    'Лечение рубцов различного происхождения',
+    'Диагностика новообразований кожи',
+    'Дерматоскопия',
+    'Лечение заболеваний кожи, волос и ногтей',
+    'Детская и взрослая дерматология',
+    'Эстетическая косметология',
+  ];
+
+  return (
+    <main className="inner team-page">
+      <section className="page-hero team-hero">
+        <p className="eyebrow">Наша команда</p>
+        <h1>Знания, которым<br /><em>можно доверять.</em></h1>
+        <p>Наши специалисты бережно соединяют клинический опыт и персональный подход к каждому пациенту.</p>
+      </section>
+
+      <section className="team-profile">
+        <div className="team-profile__image">
+          <img src={assetPath('team-ekaterina-rybovalova.jpg')} alt="Екатерина Александровна Рыбовалова" />
+        </div>
+        <div className="team-profile__intro">
+          <p className="eyebrow">Врач Symmetria</p>
+          <h2>Екатерина<br /><em>Александровна<br />Рыбовалова</em></h2>
+          <p className="team-profile__role">Врач-дерматовенеролог,<br />дерматокосметолог<br />(взрослый, детский)</p>
+          <p>Внимательный и системный подход к здоровью кожи — от диагностики до комфортного плана лечения и эстетической коррекции.</p>
+          <BookLink className="button">Записаться на консультацию</BookLink>
+        </div>
+      </section>
+
+      <section className="team-expertise">
+        <div>
+          <p className="eyebrow">Специализация</p>
+          <h2>Профессиональная<br /><em>забота о коже.</em></h2>
+        </div>
+        <ul>{specializations.map((specialization) => <li key={specialization}>{specialization}</li>)}</ul>
+      </section>
+
+      <section className="team-education">
+        <p className="eyebrow">Образование</p>
+        <div className="team-education__grid">
+          <article><span>2006 — 2012</span><h3>Лечебное дело</h3><p>Высшее медицинское образование.</p></article>
+          <article><span>2012 — 2013</span><h3>Интернатура<br />«Лечебное дело»</h3><p>Присвоена квалификация врача общей практики.</p></article>
+          <article><span>2013</span><h3>Дерматовенерология<br />и дерматокосметология</h3><p>Переподготовка по взрослому и детскому направлениям в Медицинском университете Астана, факультет последипломного непрерывного образования.</p></article>
+        </div>
+      </section>
+    </main>
+  );
+}
+
 function ContactsPage() {
   return (
     <main className="inner contacts">
@@ -185,7 +239,7 @@ function ContactsPage() {
 }
 
 function App() {
-  return <><Header /><Routes><Route path="/" element={<Home />} /><Route path="/services" element={<ServicesPage />} /><Route path="/about" element={<AboutPage />} /><Route path="/contacts" element={<ContactsPage />} /></Routes><Footer /></>;
+  return <><Header /><Routes><Route path="/" element={<Home />} /><Route path="/services" element={<ServicesPage />} /><Route path="/about" element={<AboutPage />} /><Route path="/team" element={<TeamPage />} /><Route path="/contacts" element={<ContactsPage />} /></Routes><Footer /></>;
 }
 
 export default App;
