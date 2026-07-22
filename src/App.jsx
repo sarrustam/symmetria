@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, NavLink, Route, Routes, useNavigate } from 'react-router-dom';
+import { Link, NavLink, Route, Routes } from 'react-router-dom';
 
 const navigation = [
   ['/', 'Главная'],
@@ -10,27 +10,20 @@ const navigation = [
 ];
 
 const assetPath = (fileName) => `${import.meta.env.BASE_URL}images/${fileName}`;
+const whatsappLink = 'https://wa.me/77014845499';
 
 function Brand() {
   return <Link className="brand" to="/"><i />SYMMETRIA<small>clinic of aesthetics</small></Link>;
 }
 
 function BookLink({ children, className }) {
-  const navigate = useNavigate();
-
-  const handleClick = (event) => {
-    event.preventDefault();
-    navigate('/');
-    window.setTimeout(() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' }), 0);
-  };
-
-  return <a className={className} href="#booking" onClick={handleClick}>{children}</a>;
+  return <a className={className} href={whatsappLink} target="_blank" rel="noreferrer">{children}</a>;
 }
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   return <>
-    <div className="topline"><span>Астана · проспект Мангилик Ел, 38</span><a href="tel:+77777777777">+7 777 777 77 77</a></div>
+    <div className="topline"><span>Астана · проспект Мангилик Ел, 38</span><a href="tel:+77014845499">+7 701 484 54 99</a></div>
     <header className="header">
       <Brand />
       <button className="menu-btn" aria-label="Открыть меню" onClick={() => setIsOpen(!isOpen)}>Меню <span /></button>
@@ -47,13 +40,12 @@ function Footer() {
 }
 
 function Booking() {
-  const [sent, setSent] = useState(false);
   return <section className="booking" id="booking">
     <div><p className="eyebrow">Ваш первый шаг</p><h2>Время для<br /><em>себя.</em></h2><p>Оставьте контакты — администратор подберёт удобное время и ответит на вопросы.</p></div>
-    <form onSubmit={(event) => { event.preventDefault(); setSent(true); }}>
+    <form onSubmit={(event) => { event.preventDefault(); window.open(whatsappLink, '_blank', 'noopener,noreferrer'); }}>
       <label>Ваше имя<input required placeholder="Как к вам обращаться?" /></label>
       <label>Телефон<input required type="tel" placeholder="+7 (___) ___ __ __" /></label>
-      <button className="button" type="submit" disabled={sent}>{sent ? 'Заявка отправлена ✓' : <>Отправить заявку <b>↗</b></>}</button>
+      <button className="button" type="submit">Отправить заявку <b>↗</b></button>
       <small>Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности.</small>
     </form>
   </section>;
@@ -78,11 +70,6 @@ const clinicGalleryPhotos = [
   ['clinic-detail.jpg', 'Деталь интерьера Symmetria'],
   ['clinic-room.jpg', 'Кабинет косметологии Symmetria'],
 ];
-
-function scrollToBooking(event) {
-  event.preventDefault();
-  document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' });
-}
 
 function ClinicGallery() {
   const [currentPhoto, setCurrentPhoto] = useState(0);
@@ -121,7 +108,7 @@ function Home() {
         <p className="eyebrow">Эстетическая косметология · Астана</p>
         <h1>Естественная<br /><em>красота</em> — это<br />искусство баланса.</h1>
         <p className="intro">Деликатно подчёркиваем вашу индивидуальность, опираясь на доказательную косметологию и безупречный вкус.</p>
-        <a href="#booking" className="button" onClick={scrollToBooking}>Выбрать процедуру <b>↗</b></a>
+        <BookLink className="button">Выбрать процедуру <b>↗</b></BookLink>
       </div>
       <div className="hero__art">
         <img className="hero__photo" src={assetPath('clinic-entrance.jpg')} alt="Входная зона клиники Symmetria" />
@@ -132,7 +119,7 @@ function Home() {
     <section className="statement"><p className="eyebrow">Наш подход</p><h2>Красота, в которой<br />вы <em>узнаёте себя.</em></h2><p>Мы не меняем лица — мы раскрываем их гармонию. Каждая программа создаётся врачом после внимательной диагностики и разговора о ваших желаниях.</p><Link className="text-link" to="/about">О философии Symmetria <b>→</b></Link></section>
     <section className="services-preview"><div className="section-heading"><div><p className="eyebrow">Направления</p><h2>Путь к вашей<br /><em>гармонии</em></h2></div><Link className="text-link" to="/services">Все услуги <b>→</b></Link></div><div className="service-grid">{services.map(([number, title, description], index) => <Link className={`service-card service-card--${index + 1}`} to="/services" key={number}><span>{number}</span><div><h3>{title}</h3><p>{description}</p><b>↗</b></div></Link>)}</div></section>
     <section className="numbers"><div><strong>8</strong><span>лет бережной<br />практики</span></div><div><strong>4 000<sup>+</sup></strong><span>счастливых<br />пациентов</span></div><div><strong>15</strong><span>экспертных<br />врачей</span></div><div><strong>4.9</strong><span>рейтинг<br />пациентов</span></div></section>
-    <section className="ritual"><div className="ritual__visual"><div className="arch" /><div className="sun" /><p>symmetria<br />is a feeling</p></div><div className="ritual__copy"><p className="eyebrow">Первый визит</p><h2>Ваш личный<br /><em>ритуал заботы</em></h2><ol>{[['01', 'Знакомство', 'Врач внимательно выслушает вас и ответит на все вопросы.'], ['02', 'Диагностика', 'Проведём анализ состояния кожи и черт лица.'], ['03', 'Персональный план', 'Составим комфортную программу с ясными этапами.']].map(([number, title, description]) => <li key={number}><span>{number}</span><div><b>{title}</b><p>{description}</p></div></li>)}</ol><a className="button" href="#booking" onClick={scrollToBooking}>Записаться на консультацию</a></div></section>
+    <section className="ritual"><div className="ritual__visual"><div className="arch" /><div className="sun" /><p>symmetria<br />is a feeling</p></div><div className="ritual__copy"><p className="eyebrow">Первый визит</p><h2>Ваш личный<br /><em>ритуал заботы</em></h2><ol>{[['01', 'Знакомство', 'Врач внимательно выслушает вас и ответит на все вопросы.'], ['02', 'Диагностика', 'Проведём анализ состояния кожи и черт лица.'], ['03', 'Персональный план', 'Составим комфортную программу с ясными этапами.']].map(([number, title, description]) => <li key={number}><span>{number}</span><div><b>{title}</b><p>{description}</p></div></li>)}</ol><BookLink className="button">Записаться на консультацию</BookLink></div></section>
     <section className="quote"><span>“</span><blockquote>Забота о себе начинается<br />с момента, когда вы выбираете<br /><em>слышать себя.</em></blockquote><p>— команда Symmetria</p></section>
     <Booking />
   </main>;
@@ -240,8 +227,8 @@ function ContactsPage() {
 
         <div>
           <p className="eyebrow">Позвонить</p>
-          <a className="contact-big" href="tel:+77777777777">
-            +7 777 777 77 77
+          <a className="contact-big" href="tel:+77014845499">
+            +7 701 484 54 99
           </a>
           <p className="eyebrow">Написать</p>
           <a className="contact-big" href="mailto:hello@symmetria.kz">
