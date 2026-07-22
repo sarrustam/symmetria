@@ -8,6 +8,8 @@ const navigation = [
   ['/contacts', 'Контакты'],
 ];
 
+const assetPath = (fileName) => `${import.meta.env.BASE_URL}images/${fileName}`;
+
 function Brand() {
   return <Link className="brand" to="/"><i />SYMMETRIA<small>clinic of aesthetics</small></Link>;
 }
@@ -69,7 +71,19 @@ function scrollToBooking(event) {
 
 function Home() {
   return <main>
-    <section className="hero"><div className="hero__copy"><p className="eyebrow">Эстетическая косметология · Астана</p><h1>Естественная<br /><em>красота</em> — это<br />искусство баланса.</h1><p className="intro">Деликатно подчёркиваем вашу индивидуальность, опираясь на доказательную косметологию и безупречный вкус.</p><a href="#booking" className="button" onClick={scrollToBooking}>Выбрать процедуру <b>↗</b></a></div><div className="hero__art" aria-label="Абстрактная бьюти-композиция"><div className="orb orb--gold" /><div className="orb orb--pearl" /><div className="face-line" /><div className="hero__caption">Премиальная<br />забота о себе</div></div><div className="hero__aside"><span>01</span><div /><span>04</span></div></section>
+    <section className="hero">
+      <div className="hero__copy">
+        <p className="eyebrow">Эстетическая косметология · Астана</p>
+        <h1>Естественная<br /><em>красота</em> — это<br />искусство баланса.</h1>
+        <p className="intro">Деликатно подчёркиваем вашу индивидуальность, опираясь на доказательную косметологию и безупречный вкус.</p>
+        <a href="#booking" className="button" onClick={scrollToBooking}>Выбрать процедуру <b>↗</b></a>
+      </div>
+      <div className="hero__art">
+        <img className="hero__photo" src={assetPath('clinic-entrance.jpg')} alt="Входная зона клиники Symmetria" />
+        <div className="hero__caption">Премиальная<br />забота о себе</div>
+      </div>
+      <div className="hero__aside"><span>01</span><div /><span>04</span></div>
+    </section>
     <section className="statement"><p className="eyebrow">Наш подход</p><h2>Красота, в которой<br />вы <em>узнаёте себя.</em></h2><p>Мы не меняем лица — мы раскрываем их гармонию. Каждая программа создаётся врачом после внимательной диагностики и разговора о ваших желаниях.</p><Link className="text-link" to="/about">О философии Symmetria <b>→</b></Link></section>
     <section className="services-preview"><div className="section-heading"><div><p className="eyebrow">Направления</p><h2>Путь к вашей<br /><em>гармонии</em></h2></div><Link className="text-link" to="/services">Все услуги <b>→</b></Link></div><div className="service-grid">{services.map(([number, title, description], index) => <Link className={`service-card service-card--${index + 1}`} to="/services" key={number}><span>{number}</span><div><h3>{title}</h3><p>{description}</p><b>↗</b></div></Link>)}</div></section>
     <section className="numbers"><div><strong>8</strong><span>лет бережной<br />практики</span></div><div><strong>4 000<sup>+</sup></strong><span>счастливых<br />пациентов</span></div><div><strong>15</strong><span>экспертных<br />врачей</span></div><div><strong>4.9</strong><span>рейтинг<br />пациентов</span></div></section>
@@ -87,7 +101,21 @@ const serviceDetails = [
 
 function ServicesPage() { return <main className="inner"><section className="page-hero"><p className="eyebrow">Symmetria care</p><h1>Ваша красота —<br /><em>наш язык заботы.</em></h1><p>Технологии и тактильность, чтобы вы чувствовали себя уверенно в каждом отражении.</p></section><section className="service-list">{serviceDetails.map(([number, title, description, items]) => <article key={number}><span>{number}</span><div><h2>{title}</h2><p>{description}</p></div><ul>{items.map((item) => <li key={item}>{item}</li>)}</ul><BookLink>Записаться ↗</BookLink></article>)}</section></main>; }
 
-function AboutPage() { return <main className="inner"><section className="page-hero about-hero"><p className="eyebrow">О Symmetria</p><h1>Место, где<br /><em>можно быть собой.</em></h1><p>В Symmetria мы соединяем знания врача, тонкое чувство эстетики и уважение к вашей природе.</p></section><section className="values"><p className="eyebrow">Наши ценности</p><div>{[['01', 'Деликатность', 'Мы выбираем решения, которые выглядят естественно и ощущаются комфортно.'], ['02', 'Экспертность', 'В нашей команде — врачи, которые постоянно совершенствуют свою практику.'], ['03', 'Диалог', 'Ваше доверие важнее быстрых результатов. Мы открыто говорим о каждом этапе.']].map(([number, title, text]) => <article key={number}><span>{number}</span><h2>{title}</h2><p>{text}</p></article>)}</div></section><section className="doctor"><div className="doctor__portrait"><div /></div><div><p className="eyebrow">Основательница</p><h2>Алия<br /><em>Сарсенова</em></h2><p>«Я верю, что эстетическая медицина должна возвращать не просто свежесть лицу, а спокойствие внутри. Когда вы нравитесь себе — это заметно во всём».</p><p className="doctor__sign">Алия Сарсенова<br /><small>врач-косметолог, основательница</small></p></div></section></main>; }
+function AboutPage() {
+  return <main className="inner">
+    <section className="page-hero about-hero"><p className="eyebrow">О Symmetria</p><h1>Место, где<br /><em>можно быть собой.</em></h1><p>В Symmetria мы соединяем знания врача, тонкое чувство эстетики и уважение к вашей природе.</p></section>
+    <section className="values"><p className="eyebrow">Наши ценности</p><div>{[['01', 'Деликатность', 'Мы выбираем решения, которые выглядят естественно и ощущаются комфортно.'], ['02', 'Экспертность', 'В нашей команде — врачи, которые постоянно совершенствуют свою практику.'], ['03', 'Диалог', 'Ваше доверие важнее быстрых результатов. Мы открыто говорим о каждом этапе.']].map(([number, title, text]) => <article key={number}><span>{number}</span><h2>{title}</h2><p>{text}</p></article>)}</div></section>
+    <section className="clinic-gallery">
+      <div className="clinic-gallery__heading"><p className="eyebrow">Пространство Symmetria</p><h2>Красота в<br /><em>каждой детали.</em></h2></div>
+      <div className="clinic-gallery__grid">
+        <img className="clinic-gallery__entrance" src={assetPath('clinic-entrance.jpg')} alt="Интерьер входной зоны Symmetria" />
+        <img className="clinic-gallery__detail" src={assetPath('clinic-detail.jpg')} alt="Деталь интерьера Symmetria" />
+        <img className="clinic-gallery__room" src={assetPath('clinic-room.jpg')} alt="Кабинет косметологии Symmetria" />
+      </div>
+    </section>
+    <section className="doctor"><div className="doctor__portrait"><div /></div><div><p className="eyebrow">Основательница</p><h2>Алия<br /><em>Сарсенова</em></h2><p>«Я верю, что эстетическая медицина должна возвращать не просто свежесть лицу, а спокойствие внутри. Когда вы нравитесь себе — это заметно во всём».</p><p className="doctor__sign">Алия Сарсенова<br /><small>врач-косметолог, основательница</small></p></div></section>
+  </main>;
+}
 
 function ContactsPage() {
   return (
