@@ -745,7 +745,7 @@ footer div {
   display:block;
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
   object-position:center;
   animation:gallery-in .35s ease-out;
 }
@@ -802,7 +802,8 @@ footer div {
   display:block;
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
+  background:#171614;
 }
 .doctor__portrait {
   background:linear-gradient(145deg,#c7b392,#8b7250);
