@@ -729,28 +729,80 @@ footer div {
 .clinic-gallery__heading h2 {
   font-size:42px;
 }
-.clinic-gallery__grid {
-  display:grid;
-  grid-template-columns:1.25fr .56fr .9fr;
-  grid-template-rows:250px 250px;
-  gap:16px;
+.clinic-gallery__count {
+  color:#d9bd8c;
+  font:17px var(--serif);
+  letter-spacing:.08em;
 }
-.clinic-gallery img {
+.clinic-carousel {
+  position:relative;
+  height:min(62vw,680px);
+  min-height:420px;
+  overflow:hidden;
+  background:#171614;
+}
+.clinic-carousel__image {
   display:block;
   width:100%;
   height:100%;
   object-fit:cover;
-}
-.clinic-gallery__entrance {
-  grid-row:1 / 3;
-}
-.clinic-gallery__detail {
-  grid-row:1 / 3;
   object-position:center;
+  animation:gallery-in .35s ease-out;
 }
-.clinic-gallery__room {
-  grid-row:1 / 3;
-  object-position:center;
+@keyframes gallery-in {
+  from { opacity:.25; transform:scale(1.015); }
+  to { opacity:1; transform:scale(1); }
+}
+.clinic-carousel__controls {
+  position:absolute;
+  right:24px;
+  bottom:24px;
+  display:flex;
+  gap:8px;
+}
+.clinic-carousel__controls button {
+  width:48px;
+  height:48px;
+  border:1px solid #fff8;
+  background:#211f1bbd;
+  color:#fff;
+  font:25px/1 var(--serif);
+  cursor:pointer;
+  transition:.2s;
+}
+.clinic-carousel__controls button:hover {
+  background:var(--gold);
+  border-color:var(--gold);
+}
+.clinic-carousel__thumbnails {
+  display:flex;
+  gap:9px;
+  overflow-x:auto;
+  padding:16px 0 2px;
+  scrollbar-width:thin;
+  scrollbar-color:#b99b67 #39362f;
+}
+.clinic-carousel__thumbnails button {
+  width:88px;
+  height:68px;
+  padding:0;
+  flex:0 0 auto;
+  border:1px solid transparent;
+  background:transparent;
+  opacity:.55;
+  cursor:pointer;
+  transition:.2s;
+}
+.clinic-carousel__thumbnails button:hover,
+.clinic-carousel__thumbnails button.is-active {
+  opacity:1;
+  border-color:#e0c693;
+}
+.clinic-carousel__thumbnails img {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 .doctor__portrait {
   background:linear-gradient(145deg,#c7b392,#8b7250);
@@ -1016,18 +1068,25 @@ footer div {
   .clinic-gallery__heading h2 {
     font-size:33px;
   }
-  .clinic-gallery__grid {
-    grid-template-columns:1fr 1fr;
-    grid-template-rows:240px 320px;
-    gap:10px;
+  .clinic-gallery__count {
+    display:block;
+    margin-top:20px;
   }
-  .clinic-gallery__entrance {
-    grid-column:1 / 3;
-    grid-row:auto;
+  .clinic-carousel {
+    height:420px;
+    min-height:0;
   }
-  .clinic-gallery__detail,
-  .clinic-gallery__room {
-    grid-row:auto;
+  .clinic-carousel__controls {
+    right:14px;
+    bottom:14px;
+  }
+  .clinic-carousel__controls button {
+    width:43px;
+    height:43px;
+  }
+  .clinic-carousel__thumbnails button {
+    width:69px;
+    height:54px;
   }
   .doctor {
     display:block;

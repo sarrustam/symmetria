@@ -65,9 +65,53 @@ const services = [
   ['03', 'Контуры тела', 'Лёгкость и уверенность в себе'],
 ];
 
+const clinicGalleryPhotos = [
+  ['clinic-entrance.jpg', 'Входная зона клиники Symmetria'],
+  ['clinic-staircase.jpg', 'Лестница и световая инсталляция в клинике'],
+  ['clinic-lounge.jpg', 'Зона ожидания Symmetria'],
+  ['clinic-products.jpg', 'Профессиональная косметика в клинике'],
+  ['clinic-volnewmer.jpg', 'Аппарат Volnewmer'],
+  ['clinic-consultation.jpg', 'Консультация специалиста'],
+  ['clinic-treatment-room-wide.jpg', 'Кабинет косметологии'],
+  ['clinic-treatment-room-close.jpg', 'Оснащение кабинета косметологии'],
+  ['clinic-blanket.jpg', 'Деталь заботы в кабинете'],
+  ['clinic-detail.jpg', 'Деталь интерьера Symmetria'],
+  ['clinic-room.jpg', 'Кабинет косметологии Symmetria'],
+];
+
 function scrollToBooking(event) {
   event.preventDefault();
   document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' });
+}
+
+function ClinicGallery() {
+  const [currentPhoto, setCurrentPhoto] = useState(0);
+  const [fileName, alt] = clinicGalleryPhotos[currentPhoto];
+  const previousPhoto = () => setCurrentPhoto((index) => (index - 1 + clinicGalleryPhotos.length) % clinicGalleryPhotos.length);
+  const nextPhoto = () => setCurrentPhoto((index) => (index + 1) % clinicGalleryPhotos.length);
+
+  return (
+    <section className="clinic-gallery">
+      <div className="clinic-gallery__heading">
+        <div><p className="eyebrow">Пространство Symmetria</p><h2>Красота в<br /><em>каждой детали.</em></h2></div>
+        <span className="clinic-gallery__count">{String(currentPhoto + 1).padStart(2, '0')} / {String(clinicGalleryPhotos.length).padStart(2, '0')}</span>
+      </div>
+      <div className="clinic-carousel">
+        <img className="clinic-carousel__image" src={assetPath(fileName)} alt={alt} />
+        <div className="clinic-carousel__controls">
+          <button type="button" onClick={previousPhoto} aria-label="Предыдущее фото">←</button>
+          <button type="button" onClick={nextPhoto} aria-label="Следующее фото">→</button>
+        </div>
+      </div>
+      <div className="clinic-carousel__thumbnails" aria-label="Выбрать фотографию">
+        {clinicGalleryPhotos.map(([thumbnail, thumbnailAlt], index) => (
+          <button className={index === currentPhoto ? 'is-active' : ''} type="button" key={thumbnail} onClick={() => setCurrentPhoto(index)} aria-label={thumbnailAlt}>
+            <img src={assetPath(thumbnail)} alt="" />
+          </button>
+        ))}
+      </div>
+    </section>
+  );
 }
 
 function Home() {
@@ -106,14 +150,7 @@ function AboutPage() {
   return <main className="inner">
     <section className="page-hero about-hero"><p className="eyebrow">О Symmetria</p><h1>Место, где<br /><em>можно быть собой.</em></h1><p>В Symmetria мы соединяем знания врача, тонкое чувство эстетики и уважение к вашей природе.</p></section>
     <section className="values"><p className="eyebrow">Наши ценности</p><div>{[['01', 'Деликатность', 'Мы выбираем решения, которые выглядят естественно и ощущаются комфортно.'], ['02', 'Экспертность', 'В нашей команде — врачи, которые постоянно совершенствуют свою практику.'], ['03', 'Диалог', 'Ваше доверие важнее быстрых результатов. Мы открыто говорим о каждом этапе.']].map(([number, title, text]) => <article key={number}><span>{number}</span><h2>{title}</h2><p>{text}</p></article>)}</div></section>
-    <section className="clinic-gallery">
-      <div className="clinic-gallery__heading"><p className="eyebrow">Пространство Symmetria</p><h2>Красота в<br /><em>каждой детали.</em></h2></div>
-      <div className="clinic-gallery__grid">
-        <img className="clinic-gallery__entrance" src={assetPath('clinic-entrance.jpg')} alt="Интерьер входной зоны Symmetria" />
-        <img className="clinic-gallery__detail" src={assetPath('clinic-detail.jpg')} alt="Деталь интерьера Symmetria" />
-        <img className="clinic-gallery__room" src={assetPath('clinic-room.jpg')} alt="Кабинет косметологии Symmetria" />
-      </div>
-    </section>
+    <ClinicGallery />
     <section className="doctor"><div className="doctor__portrait"><div /></div><div><p className="eyebrow">Основательница</p><h2>Алия<br /><em>Сарсенова</em></h2><p>«Я верю, что эстетическая медицина должна возвращать не просто свежесть лицу, а спокойствие внутри. Когда вы нравитесь себе — это заметно во всём».</p><p className="doctor__sign">Алия Сарсенова<br /><small>врач-косметолог, основательница</small></p></div></section>
   </main>;
 }
