@@ -26,7 +26,7 @@ function Header() {
     <div className="topline"><span>Астана · проспект Мангилик Ел, 38</span><a href="tel:+77014845499">+7 701 484 54 99</a></div>
     <header className="header">
       <Brand />
-      <button className="menu-btn" aria-label="Открыть меню" onClick={() => setIsOpen(!isOpen)}>Меню <span /></button>
+      <button className={`menu-btn ${isOpen ? 'is-open' : ''}`} aria-label={isOpen ? 'Закрыть меню' : 'Открыть меню'} aria-expanded={isOpen} onClick={() => setIsOpen(!isOpen)}><span /></button>
       <nav className={`nav ${isOpen ? 'open' : ''}`}>
         {navigation.map(([to, label]) => <NavLink key={to} to={to} end={to === '/'} onClick={() => setIsOpen(false)}>{label}</NavLink>)}
       </nav>
@@ -142,18 +142,31 @@ function AboutPage() {
   </main>;
 }
 
-function TeamPage() {
-  const specializations = [
-    'Лечение акне и постакне',
-    'Терапия тяжёлых форм акне системными ретиноидами',
-    'Лечение рубцов различного происхождения',
-    'Диагностика новообразований кожи',
-    'Дерматоскопия',
-    'Лечение заболеваний кожи, волос и ногтей',
-    'Детская и взрослая дерматология',
-    'Эстетическая косметология',
-  ];
+const teamMembers = [
+  {
+    name: 'Екатерина Александровна Рыбовалова',
+    shortName: <>Екатерина<br /><em>Александровна<br />Рыбовалова</em></>,
+    role: 'Врач-дерматовенеролог, дерматокосметолог (взрослый, детский)',
+    image: 'team-ekaterina-rybovalova.jpg',
+    specializations: [
+      'Лечение акне и постакне',
+      'Терапия тяжёлых форм акне системными ретиноидами',
+      'Лечение рубцов различного происхождения',
+      'Диагностика новообразований кожи',
+      'Дерматоскопия',
+      'Лечение заболеваний кожи, волос и ногтей',
+      'Детская и взрослая дерматология',
+      'Эстетическая косметология',
+    ],
+    education: [
+      ['2006 — 2012', 'Лечебное дело', 'Высшее медицинское образование.'],
+      ['2012 — 2013', 'Интернатура «Лечебное дело»', 'Присвоена квалификация врача общей практики.'],
+      ['2013', 'Дерматовенерология и дерматокосметология', 'Переподготовка по взрослому и детскому направлениям в Медицинском университете Астана, факультет последипломного непрерывного образования.'],
+    ],
+  },
+];
 
+function TeamPage() {
   return (
     <main className="inner team-page">
       <section className="page-hero team-hero">
@@ -162,34 +175,20 @@ function TeamPage() {
         <p>Наши специалисты бережно соединяют клинический опыт и персональный подход к каждому пациенту.</p>
       </section>
 
-      <section className="team-profile">
-        <div className="team-profile__image">
-          <img src={assetPath('team-ekaterina-rybovalova.jpg')} alt="Екатерина Александровна Рыбовалова" />
-        </div>
-        <div className="team-profile__intro">
-          <p className="eyebrow">Врач Symmetria</p>
-          <h2>Екатерина<br /><em>Александровна<br />Рыбовалова</em></h2>
-          <p className="team-profile__role">Врач-дерматовенеролог,<br />дерматокосметолог<br />(взрослый, детский)</p>
-          <p>Внимательный и системный подход к здоровью кожи — от диагностики до комфортного плана лечения и эстетической коррекции.</p>
-          <BookLink className="button">Записаться на консультацию</BookLink>
-        </div>
-      </section>
-
-      <section className="team-expertise">
-        <div>
-          <p className="eyebrow">Специализация</p>
-          <h2>Профессиональная<br /><em>забота о коже.</em></h2>
-        </div>
-        <ul>{specializations.map((specialization) => <li key={specialization}>{specialization}</li>)}</ul>
-      </section>
-
-      <section className="team-education">
-        <p className="eyebrow">Образование</p>
-        <div className="team-education__grid">
-          <article><span>2006 — 2012</span><h3>Лечебное дело</h3><p>Высшее медицинское образование.</p></article>
-          <article><span>2012 — 2013</span><h3>Интернатура<br />«Лечебное дело»</h3><p>Присвоена квалификация врача общей практики.</p></article>
-          <article><span>2013</span><h3>Дерматовенерология<br />и дерматокосметология</h3><p>Переподготовка по взрослому и детскому направлениям в Медицинском университете Астана, факультет последипломного непрерывного образования.</p></article>
-        </div>
+      <section className="team-roster" aria-label="Специалисты Symmetria">
+        {teamMembers.map((member, index) => (
+          <article className="team-doctor" key={member.name}>
+            <header className="team-doctor__label"><span>{String(index + 1).padStart(2, '0')}</span><p>Специалист Symmetria</p></header>
+            <div className="team-doctor__overview">
+              <div className="team-doctor__image"><img src={assetPath(member.image)} alt={member.name} /></div>
+              <div className="team-doctor__intro"><p className="eyebrow">Ваш врач</p><h2>{member.shortName}</h2><p className="team-doctor__role">{member.role}</p><p>Внимательный и системный подход к здоровью кожи — от диагностики до комфортного плана лечения и эстетической коррекции.</p><BookLink className="button">Записаться к врачу</BookLink></div>
+            </div>
+            <div className="team-doctor__details">
+              <section className="team-doctor__specialties"><p className="eyebrow">Специализация</p><ul>{member.specializations.map((specialization) => <li key={specialization}>{specialization}</li>)}</ul></section>
+              <section className="team-doctor__education"><p className="eyebrow">Образование</p><div>{member.education.map(([period, title, description]) => <article key={period}><span>{period}</span><h3>{title}</h3><p>{description}</p></article>)}</div></section>
+            </div>
+          </article>
+        ))}
       </section>
     </main>
   );
