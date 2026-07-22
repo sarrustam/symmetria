@@ -43,35 +43,13 @@ a {
   border-bottom:1px solid #eeeae4;
 }
 .brand {
-  display:grid;
-  position:relative;
-  padding-left:21px;
-  font-size:15px;
-  font-weight:700;
-  letter-spacing:.18em;
-  line-height:1;
+  display:block;
+  flex:0 0 auto;
 }
-.brand i {
-  position:absolute;
-  left:0;
-  top:0;
-  width:14px;
-  height:14px;
-  border:1px solid var(--gold);
-  border-radius:50%;
-}
-.brand i:after {
-  content:'';
-  position:absolute;
-  inset:3px;
-  border-radius:50%;
-  background:var(--gold);
-}
-.brand small {
-  font-size:5px;
-  letter-spacing:.2em;
-  color:#887653;
-  margin-top:5px;
+.brand__logo {
+  display:block;
+  width:176px;
+  height:auto;
 }
 .nav {
   display:flex;
@@ -1020,6 +998,9 @@ footer div {
     padding:0 20px;
     height:75px;
     position:relative;
+  }
+  .brand__logo {
+    width:142px;
   }
   .nav,.header-book {
     display:none;

@@ -13,7 +13,7 @@ const assetPath = (fileName) => `${import.meta.env.BASE_URL}images/${fileName}`;
 const whatsappLink = 'https://wa.me/77014845499';
 
 function Brand() {
-  return <Link className="brand" to="/"><i />SYMMETRIA<small>clinic of aesthetics</small></Link>;
+  return <Link className="brand" to="/" aria-label="Symmetria — на главную"><img className="brand__logo" src={assetPath('symmetria-logo.svg')} alt="Symmetria Clinic" /></Link>;
 }
 
 function BookLink({ children, className }) {
