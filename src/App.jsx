@@ -20,6 +20,10 @@ function BookLink({ children, className }) {
   return <a className={className} href={whatsappLink} target="_blank" rel="noreferrer">{children}</a>;
 }
 
+function ArrowIcon() {
+  return <span className="arrow-icon" aria-hidden="true" />;
+}
+
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   return <>
@@ -45,7 +49,7 @@ function Booking() {
     <form onSubmit={(event) => { event.preventDefault(); window.open(whatsappLink, '_blank', 'noopener,noreferrer'); }}>
       <label>Ваше имя<input required placeholder="Как к вам обращаться?" /></label>
       <label>Телефон<input required type="tel" placeholder="+7 (___) ___ __ __" /></label>
-      <button className="button" type="submit">Отправить заявку <b>↗</b></button>
+      <button className="button" type="submit">Отправить заявку <ArrowIcon /></button>
       <small>Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности.</small>
     </form>
   </section>;
@@ -108,7 +112,7 @@ function Home() {
         <p className="eyebrow">Эстетическая косметология · Астана</p>
         <h1>Естественная<br /><em>красота</em> — это<br />искусство баланса.</h1>
         <p className="intro">Деликатно подчёркиваем вашу индивидуальность, опираясь на доказательную косметологию и безупречный вкус.</p>
-        <BookLink className="button">Выбрать процедуру <b>↗</b></BookLink>
+        <BookLink className="button">Выбрать процедуру <ArrowIcon /></BookLink>
       </div>
       <div className="hero__art">
         <img className="hero__photo" src={assetPath('clinic-entrance.jpg')} alt="Входная зона клиники Symmetria" />
@@ -117,7 +121,7 @@ function Home() {
       <div className="hero__aside"><span>01</span><div /><span>04</span></div>
     </section>
     <section className="statement"><p className="eyebrow">Наш подход</p><h2>Красота, в которой<br />вы <em>узнаёте себя.</em></h2><p>Мы не меняем лица — мы раскрываем их гармонию. Каждая программа создаётся врачом после внимательной диагностики и разговора о ваших желаниях.</p><Link className="text-link" to="/about">О философии Symmetria <b>→</b></Link></section>
-    <section className="services-preview"><div className="section-heading"><div><p className="eyebrow">Направления</p><h2>Путь к вашей<br /><em>гармонии</em></h2></div><Link className="text-link" to="/services">Все услуги <b>→</b></Link></div><div className="service-grid">{services.map(([number, title, description], index) => <Link className={`service-card service-card--${index + 1}`} to="/services" key={number}><span>{number}</span><div><h3>{title}</h3><p>{description}</p><b>↗</b></div></Link>)}</div></section>
+    <section className="services-preview"><div className="section-heading"><div><p className="eyebrow">Направления</p><h2>Путь к вашей<br /><em>гармонии</em></h2></div><Link className="text-link" to="/services">Все услуги <b>→</b></Link></div><div className="service-grid">{services.map(([number, title, description], index) => <Link className={`service-card service-card--${index + 1}`} to="/services" key={number}><span>{number}</span><div><h3>{title}</h3><p>{description}</p><ArrowIcon /></div></Link>)}</div></section>
     <section className="numbers"><div><strong>8</strong><span>лет бережной<br />практики</span></div><div><strong>4 000<sup>+</sup></strong><span>счастливых<br />пациентов</span></div><div><strong>15</strong><span>экспертных<br />врачей</span></div><div><strong>4.9</strong><span>рейтинг<br />пациентов</span></div></section>
     <section className="ritual"><div className="ritual__visual"><div className="arch" /><div className="sun" /><p>symmetria<br />is a feeling</p></div><div className="ritual__copy"><p className="eyebrow">Первый визит</p><h2>Ваш личный<br /><em>ритуал заботы</em></h2><ol>{[['01', 'Знакомство', 'Врач внимательно выслушает вас и ответит на все вопросы.'], ['02', 'Диагностика', 'Проведём анализ состояния кожи и черт лица.'], ['03', 'Персональный план', 'Составим комфортную программу с ясными этапами.']].map(([number, title, description]) => <li key={number}><span>{number}</span><div><b>{title}</b><p>{description}</p></div></li>)}</ol><BookLink className="button">Записаться на консультацию</BookLink></div></section>
     <section className="quote"><span>“</span><blockquote>Забота о себе начинается<br />с момента, когда вы выбираете<br /><em>слышать себя.</em></blockquote><p>— команда Symmetria</p></section>
@@ -131,7 +135,7 @@ const serviceDetails = [
   ['03', 'Контуры тела', 'Комплексный подход к качеству кожи, силуэту и ощущению лёгкости.', ['Эндосфера-терапия', 'Лимфодренаж', 'Аппаратные методики', 'Уходы для тела']],
 ];
 
-function ServicesPage() { return <main className="inner"><section className="page-hero"><p className="eyebrow">Symmetria care</p><h1>Ваша красота —<br /><em>наш язык заботы.</em></h1><p>Технологии и тактильность, чтобы вы чувствовали себя уверенно в каждом отражении.</p></section><section className="service-list">{serviceDetails.map(([number, title, description, items]) => <article key={number}><span>{number}</span><div><h2>{title}</h2><p>{description}</p></div><ul>{items.map((item) => <li key={item}>{item}</li>)}</ul><BookLink>Записаться ↗</BookLink></article>)}</section></main>; }
+function ServicesPage() { return <main className="inner"><section className="page-hero"><p className="eyebrow">Symmetria care</p><h1>Ваша красота —<br /><em>наш язык заботы.</em></h1><p>Технологии и тактильность, чтобы вы чувствовали себя уверенно в каждом отражении.</p></section><section className="service-list">{serviceDetails.map(([number, title, description, items]) => <article key={number}><span>{number}</span><div><h2>{title}</h2><p>{description}</p></div><ul>{items.map((item) => <li key={item}>{item}</li>)}</ul><BookLink>Записаться <ArrowIcon /></BookLink></article>)}</section></main>; }
 
 function AboutPage() {
   return <main className="inner">
@@ -220,7 +224,7 @@ function ContactsPage() {
             target="_blank"
             rel="noreferrer"
           >
-            Построить маршрут ↗
+            Построить маршрут <ArrowIcon />
           </a>
         </div>
 
