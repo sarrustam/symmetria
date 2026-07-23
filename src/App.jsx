@@ -134,12 +134,35 @@ function Home() {
 }
 
 const serviceDetails = [
-  ['01', 'Эстетика лица', 'Мягкая коррекция и профилактика возрастных изменений с сохранением вашей мимики и характера.', ['Ботулинотерапия', 'Контурная пластика', 'Биоревитализация', 'SMAS-лифтинг']],
-  ['02', 'Здоровье кожи', 'Продуманные протоколы для чистой, плотной и сияющей кожи без агрессивных решений.', ['Чистка лица', 'Пилинги', 'Фотоомоложение', 'Лазерные методики']],
-  ['03', 'Контуры тела', 'Комплексный подход к качеству кожи, силуэту и ощущению лёгкости.', ['Эндосфера-терапия', 'Лимфодренаж', 'Аппаратные методики', 'Уходы для тела']],
+  { number: '01', title: 'Консультации врачей', price: 'от 8 000 ₸', description: 'Начинаем с диагностики и понятного плана лечения или эстетической коррекции.', items: ['Онлайн-консультация, 30 минут — 8 000 ₸', 'Косметологическая консультация — 10 000 ₸', 'Дерматологическая консультация — 10 000 ₸', 'SkinScan + консультация — 15 000 ₸'] },
+  { number: '02', title: 'Очищение, пилинги и уходы', price: 'от 8 000 ₸', description: 'Программы для акне, постакне, пигментации, сияния и обновления кожи.', items: ['Пилинги pHformula и Biorepeel — от 28 500 ₸', 'PRX-T33 — от 27 500 ₸', 'Очищение лица — от 18 000 ₸', 'Окситерапия HydroPeptide — 30 000 ₸'] },
+  { number: '03', title: 'Инъекционная косметология', price: 'от 60 000 ₸', description: 'Биоревитализация и коллагеностимуляция для качества кожи и естественного омоложения.', items: ['Juvelook — от 60 000 ₸', 'Rejuran — от 95 000 ₸', 'Profhilo — от 140 000 ₸', 'Radiesse 1,5 мл — от 160 000 ₸'] },
+  { number: '04', title: 'Контурная пластика и ботулинотерапия', price: 'от 1 100 ₸', description: 'Деликатная коррекция объёмов, мимики и отдельных зон лица.', items: ['Ботулинотерапия Dysport — от 1 100 ₸ за единицу', 'Губы — от 110 000 ₸', 'Контурная пластика — от 100 000 ₸', 'Full Face ботулинотерапия — от 165 000 ₸'] },
+  { number: '05', title: 'Аппаратная косметология', price: 'от 22 000 ₸', description: 'Современные методики лифтинга, улучшения текстуры и тона кожи.', items: ['Morpheus 8 — от 280 000 ₸', 'Ultraformer MPT — от 120 000 ₸', 'Lumecca — от 30 000 ₸', 'Spectra — от 22 000 ₸'] },
+  { number: '06', title: 'Лазерные методики', price: 'от 3 000 ₸', description: 'Работа с качеством кожи, постакне, пигментацией, новообразованиями и признаками возрастных изменений.', items: ['DEKA CO₂-шлифовка — от 20 000 ₸', 'Лазерное омоложение Mediostar — от 10 000 ₸', 'Лечение акне Mediostar — от 5 000 ₸', 'RF-лифтинг Forma — от 35 000 ₸'] },
+  { number: '07', title: 'Трихология и восстановление волос', price: 'от 25 000 ₸', description: 'Поддержка кожи головы и волос с помощью инъекционных и аппаратных протоколов.', items: ['Мезотерапия DR.CYJ Hair Filler — от 35 000 ₸', 'Плазмотерапия Cortexil PRP — от 50 000 ₸', 'Плазмотерапия RegenLab — от 120 000 ₸', 'DermaDrop Shine & Glow — от 35 000 ₸'] },
+  { number: '08', title: 'Эстетика тела и эпиляция', price: 'от 5 000 ₸', description: 'Аппаратные программы для контуров тела, качества кожи и комфортной лазерной эпиляции.', items: ['ICOONE, 60 минут — от 27 000 ₸', 'Volnewmer — от 120 000 ₸', 'Лазерная эпиляция Mediostar — от 5 000 ₸', 'Липолитики — от 35 000 ₸'] },
 ];
 
-function ServicesPage() { return <main className="inner"><section className="page-hero"><p className="eyebrow">Symmetria care</p><h1>Ваша красота —<br /><em>наш язык заботы.</em></h1><p>Технологии и тактильность, чтобы вы чувствовали себя уверенно в каждом отражении.</p></section><section className="service-list">{serviceDetails.map(([number, title, description, items]) => <article key={number}><span>{number}</span><div><h2>{title}</h2><p>{description}</p></div><ul>{items.map((item) => <li key={item}>{item}</li>)}</ul><BookLink>Записаться <ArrowIcon /></BookLink></article>)}</section></main>; }
+function ServicesPage() {
+  return <main className="inner">
+    <section className="page-hero">
+      <p className="eyebrow">Прайс Symmetria</p>
+      <h1>Забота, подобранная<br /><em>для вас.</em></h1>
+      <p>Стоимость зависит от зоны, препарата и индивидуального плана. Уточните точную цену и доступное время записи у администратора.</p>
+    </section>
+    <section className="service-list" aria-label="Услуги и ориентировочные цены">
+      {serviceDetails.map(({ number, title, price, description, items }) => (
+        <article key={number}>
+          <span>{number}</span>
+          <div><h2>{title}</h2><p>{description}</p><strong className="service-list__price">{price}</strong></div>
+          <ul>{items.map((item) => <li key={item}>{item}</li>)}</ul>
+          <BookLink>Уточнить цену <ArrowIcon /></BookLink>
+        </article>
+      ))}
+    </section>
+  </main>;
+}
 
 function AboutPage() {
   return <main className="inner">
