@@ -725,6 +725,11 @@ footer div {
   object-fit:contain;
   object-position:center;
 }
+/* Фото Екатерины имеет более широкий исходный формат, чем остальные портреты. */
+.team-doctor:first-child .team-doctor__image img {
+  object-fit:cover;
+  object-position:center;
+}
 .team-doctor__intro {
   padding:46px 40px;
   background:#292720;
