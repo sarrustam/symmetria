@@ -271,38 +271,6 @@ function TeamPage() {
         <p>Наши специалисты бережно соединяют клинический опыт и персональный подход к каждому пациенту.</p>
       </section>
 
-      <section className="team-roster" aria-label="Специалисты Symmetria">
-        {teamMembers.map((member, index) => (
-          <article className="team-doctor" key={member.name}>
-            <header className="team-doctor__label">
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              <p>Специалист Symmetria</p>
-            </header>
-            <div className="team-doctor__overview">
-              <div className="team-doctor__image">
-                <img src={assetPath(member.image)} alt={member.name} />
-              </div>
-              <div className="team-doctor__intro">
-                <p className="eyebrow">Ваш врач</p>
-                <h2>{member.shortName}</h2>
-                <p className="team-doctor__role">{member.role}</p>
-                <p>Внимательный и системный подход к здоровью кожи — от диагностики до комфортного плана лечения и эстетической коррекции.</p>
-                <BookLink className="button">Записаться к врачу</BookLink>
-              </div>
-            </div>
-            <div className="team-doctor__details">
-              <section className="team-doctor__specialties">
-                <p className="eyebrow">Специализация</p>
-                <ul>{member.specializations.map((specialization) => <li key={specialization}>{specialization}</li>)}</ul>
-              </section>
-              <section className="team-doctor__education">
-                <p className="eyebrow">Образование</p>
-                <div>{member.education.map(([period, title, description]) => <article key={period}><span>{period}</span><h3>{title}</h3><p>{description}</p></article>)}</div>
-              </section>
-            </div>
-          </article>
-        ))}
-      </section>
 
     </main>
   );
