@@ -708,7 +708,6 @@ footer div {
 .team-doctor__overview {
   display:grid;
   grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);
-  height:860px;
   align-items:stretch;
 }
 .team-doctor__image {
@@ -1233,7 +1232,6 @@ footer div {
   }
   .team-doctor__overview {
     display:block;
-    height:auto;
   }
   .team-doctor__image {
     height:480px;
