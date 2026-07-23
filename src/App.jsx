@@ -157,7 +157,7 @@ function ServicesPage() {
           <span>{number}</span>
           <div><h2>{title}</h2><p>{description}</p><strong className="service-list__price">{price}</strong></div>
           <ul>{items.map((item) => <li key={item}>{item}</li>)}</ul>
-          <BookLink>Уточнить цену <ArrowIcon /></BookLink>
+          <BookLink className="button service-list__button">Уточнить цену</BookLink>
         </article>
       ))}
     </section>

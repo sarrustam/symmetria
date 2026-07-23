@@ -578,6 +578,17 @@ footer div {
   letter-spacing:.1em;
   color:#927340;
 }
+.service-list .service-list__button {
+  display:inline-flex;
+  justify-content:center;
+  min-width:150px;
+  padding:15px 18px;
+  color:#fff;
+  font-size:10px;
+}
+.service-list .service-list__button:hover {
+  color:#927340;
+}
 .about-hero {
   background:linear-gradient(120deg,#f7f3ec,#e6d6b9);
 }
