@@ -711,7 +711,8 @@ footer div {
   align-items:stretch;
 }
 .team-doctor__image {
-  height:380px;
+  height:auto;
+  align-self:stretch;
   background:#e8e3da;
   display:grid;
   place-items:center;
