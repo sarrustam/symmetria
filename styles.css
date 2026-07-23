@@ -675,13 +675,18 @@ footer div {
 }
 .team-roster {
   padding:0 8vw 100px;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:42px 28px;
 }
 .team-doctor {
-  padding-top:34px;
+  display:flex;
+  flex-direction:column;
+  padding-top:24px;
   border-top:1px solid var(--gold);
 }
 .team-doctor + .team-doctor {
-  margin-top:100px;
+  margin-top:0;
 }
 .team-doctor__label {
   display:flex;
@@ -701,11 +706,10 @@ footer div {
   color:#8a806f;
 }
 .team-doctor__overview {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  min-height:620px;
+  display:block;
 }
 .team-doctor__image {
+  height:380px;
   background:#e8e3da;
   overflow:hidden;
 }
@@ -717,7 +721,7 @@ footer div {
   object-position:center 24%;
 }
 .team-doctor__intro {
-  padding:90px 9vw 70px 7vw;
+  padding:46px 40px;
   background:#292720;
   color:#fff;
 }
@@ -725,13 +729,13 @@ footer div {
   color:#d9bd8c;
 }
 .team-doctor__intro h2 {
-  font-size:39px;
+  font-size:32px;
 }
 .team-doctor__role {
   max-width:380px;
-  margin:30px 0 18px;
+  margin:22px 0 14px;
   color:#eadcc5;
-  font:17px/1.45 var(--serif);
+  font:15px/1.45 var(--serif);
 }
 .team-doctor__intro > p:not(.eyebrow):not(.team-doctor__role) {
   max-width:360px;
@@ -742,10 +746,9 @@ footer div {
   margin-top:25px;
 }
 .team-doctor__details {
-  display:grid;
-  grid-template-columns:.9fr 1.55fr;
-  gap:9vw;
-  padding:65px 7vw;
+  display:block;
+  flex:1;
+  padding:42px 40px;
   background:var(--pale);
 }
 .team-doctor__specialties ul {
@@ -769,13 +772,17 @@ footer div {
   line-height:.8;
 }
 .team-doctor__education > div {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:24px;
+  display:block;
 }
 .team-doctor__education article {
   border-top:1px solid var(--gold);
   padding-top:14px;
+}
+.team-doctor__education {
+  margin-top:42px;
+}
+.team-doctor__education article + article {
+  margin-top:22px;
 }
 .team-doctor__education span {
   color:var(--gold);
@@ -1202,6 +1209,7 @@ footer div {
   }
   .team-roster {
     padding:0 20px 65px;
+    display:block;
   }
   .team-doctor {
     padding-top:24px;
