@@ -294,7 +294,43 @@ function TeamPage() {
         <p>Наши специалисты бережно соединяют клинический опыт и персональный подход к каждому пациенту.</p>
       </section>
 
+      <section className="team-cards" aria-label="Врачи Symmetria">
+        {teamMembers.map((member, index) => (
+          <article className="team-card" key={member.name}>
+            <div className="team-card__image">
+              <img src={assetPath(member.image)} alt={member.name} />
+              <span>{String(index + 1).padStart(2, '0')}</span>
+            </div>
+            <div className="team-card__content">
+              <p className="eyebrow">Специалист Symmetria</p>
+              <h2>{member.name}</h2>
+              <p className="team-card__role">{member.role}</p>
 
+              <section className="team-card__specialties">
+                <h3>Направления работы</h3>
+                <ul>
+                  {member.specializations.map((specialization) => <li key={specialization}>{specialization}</li>)}
+                </ul>
+              </section>
+
+              <details className="team-card__education">
+                <summary>Образование и опыт <span aria-hidden="true">+</span></summary>
+                <div>
+                  {member.education.map(([period, title, description]) => (
+                    <article key={`${period}-${title}`}>
+                      <span>{period}</span>
+                      <h3>{title}</h3>
+                      <p>{description}</p>
+                    </article>
+                  ))}
+                </div>
+              </details>
+
+              <BookLink className="button team-card__button">Записаться к врачу</BookLink>
+            </div>
+          </article>
+        ))}
+      </section>
     </main>
   );
 }
