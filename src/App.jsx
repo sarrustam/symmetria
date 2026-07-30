@@ -285,6 +285,11 @@ const teamMembers = [
   },
 ];
 
+const displayedTeamMembers = [
+  teamMembers[teamMembers.length - 1],
+  ...teamMembers.slice(0, -1),
+];
+
 function TeamPage() {
   return (
     <main className="inner team-page">
@@ -295,7 +300,7 @@ function TeamPage() {
       </section>
 
       <section className="team-cards" aria-label="Врачи Symmetria">
-        {teamMembers.map((member, index) => (
+        {displayedTeamMembers.map((member, index) => (
           <article className="team-card" key={member.name}>
             <div className="team-card__image">
               <img src={assetPath(member.image)} alt={member.name} />
