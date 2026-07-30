@@ -295,10 +295,12 @@ function TeamPage() {
       </section>
 
       <section className="team-cards" aria-label="Врачи Symmetria">
-        {teamMembers.map((member, index) => (
-          <article className="team-card" key={member.name}>
-            <div className="team-card__image">
-              <img src={assetPath(member.image)} alt={member.name} />
+        {teamMembers.map((member, index) => {
+          const imageSrc = assetPath(member.image);
+
+          return <article className="team-card" key={member.name}>
+            <div className="team-card__image" style={{ '--doctor-image': `url(${imageSrc})` }}>
+              <img src={imageSrc} alt={member.name} />
               <span>{String(index + 1).padStart(2, '0')}</span>
             </div>
             <div className="team-card__content">
@@ -328,8 +330,8 @@ function TeamPage() {
 
               <BookLink className="button team-card__button">Записаться к врачу</BookLink>
             </div>
-          </article>
-        ))}
+          </article>;
+        })}
       </section>
     </main>
   );
