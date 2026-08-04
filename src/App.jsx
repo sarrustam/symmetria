@@ -4,6 +4,7 @@ import { Link, NavLink, Route, Routes } from 'react-router-dom';
 const navigation = [
   ['/', 'Главная'],
   ['/services', 'Услуги'],
+  ['/devices', 'Аппараты'],
   ['/about', 'О клинике'],
   ['/team', 'Наша команда'],
   ['/contacts', 'Контакты'],
@@ -64,6 +65,99 @@ const services = [
   ['02', 'Здоровье кожи', 'Уход, сияние и обновление'],
   ['03', 'Контуры тела', 'Лёгкость и уверенность в себе'],
 ];
+
+const deviceCatalog = [
+  {
+    number: '01',
+    name: 'SmartXide Punto',
+    brand: 'DEKA · CO₂-лазер',
+    image: 'devices/deka-smartxide-punto.png',
+    shortDescription: 'CO₂-лазерная платформа для деликатных протоколов обновления рельефа и качества кожи.',
+    technology: 'RF CO₂-лазер с фракционной технологией: врач настраивает параметры под зону, задачу и индивидуальные особенности кожи.',
+    directions: ['Выравнивание текстуры и рельефа кожи', 'Работа с постакне, рубцами и растяжками', 'Протоколы обновления кожи лица и тела'],
+  },
+  {
+    number: '02',
+    name: 'Dermadrop',
+    brand: 'TDA-технология',
+    image: 'devices/dermadrop.png',
+    shortDescription: 'Безыгольная трансдермальная доставка активных компонентов для персонализированного ухода.',
+    technology: 'Технология TDA помогает доставлять активные ингредиенты без инъекций и без прямого контакта с кожей.',
+    directions: ['Интенсивное увлажнение и восстановление барьера', 'Программы для сияния, ровного тона и качества кожи', 'Поддерживающие протоколы для кожи головы'],
+  },
+  {
+    number: '03',
+    name: 'Heleo4',
+    brand: 'LED-фототерапия',
+    image: 'devices/heleo4.png',
+    shortDescription: 'Световая технология для деликатных поддерживающих протоколов восстановления и обновления кожи.',
+    technology: 'LED-свет различной длины волны используется в составе врачебных программ и подбирается после оценки состояния кожи.',
+    directions: ['Поддержка восстановления кожи', 'Программы для ровного тона и здорового сияния', 'Комфортное дополнение к комплексному уходу'],
+  },
+  {
+    number: '04',
+    name: 'Spectra XT',
+    brand: 'Lutronic · лазерная платформа',
+    image: 'devices/spectra-xt.png',
+    shortDescription: 'Лазерная платформа для протоколов ровного тона, сияния и обновления кожи.',
+    technology: 'Многофункциональная лазерная система позволяет врачу подбирать режим и интенсивность процедуры для конкретной эстетической задачи.',
+    directions: ['Карбоновый пилинг и лазерный тонинг', 'Работа с неровным тоном и проявлениями пигментации', 'Программы для улучшения общего вида кожи'],
+  },
+  {
+    number: '05',
+    name: 'Ultraformer MPT',
+    brand: 'HIFU-лифтинг',
+    image: 'devices/ultraformer-mpt.png',
+    shortDescription: 'Аппарат для неинвазивных программ лифтинга и улучшения плотности кожи лица и тела.',
+    technology: 'Сфокусированный ультразвук работает на заданной глубине тканей; зоны и параметры врач определяет на консультации.',
+    directions: ['Лифтинг овала лица и подчелюстной области', 'Поддержка плотности и упругости кожи', 'Локальные протоколы для тела'],
+  },
+  {
+    number: '06',
+    name: 'Volnewmer',
+    brand: 'CLASSYS · монополярный RF',
+    image: 'devices/volnewmer.png',
+    shortDescription: 'Радиочастотная технология для мягких программ укрепления и улучшения качества кожи.',
+    technology: 'Монополярная радиочастотная энергия прогревает ткани контролируемым способом; процедура проводится с индивидуальными настройками.',
+    directions: ['Повышение визуальной упругости кожи', 'Программы для лица, шеи и области вокруг глаз', 'Работа с отдельными зонами тела'],
+  },
+];
+
+function DevicesCarousel() {
+  const [currentDevice, setCurrentDevice] = useState(0);
+  const device = deviceCatalog[currentDevice];
+  const previousDevice = () => setCurrentDevice((index) => (index - 1 + deviceCatalog.length) % deviceCatalog.length);
+  const nextDevice = () => setCurrentDevice((index) => (index + 1) % deviceCatalog.length);
+
+  return (
+    <section className="devices-preview">
+      <div className="devices-preview__heading">
+        <div><p className="eyebrow">Аппаратная косметология</p><h2>Технологии для<br /><em>вашей гармонии.</em></h2></div>
+        <Link className="text-link" to="/devices">Все аппараты <b>→</b></Link>
+      </div>
+      <article className="device-carousel">
+        <div className="device-carousel__image"><img src={assetPath(device.image)} alt={`Аппарат ${device.name}`} /></div>
+        <div className="device-carousel__content" key={device.name}>
+          <span className="device-carousel__count">{device.number} / {String(deviceCatalog.length).padStart(2, '0')}</span>
+          <p className="eyebrow">{device.brand}</p>
+          <h3>{device.name}</h3>
+          <p>{device.shortDescription}</p>
+          <ul>{device.directions.map((direction) => <li key={direction}>{direction}</li>)}</ul>
+          <div className="device-carousel__bottom">
+            <Link className="text-link" to="/devices">Подробнее <b>→</b></Link>
+            <div className="device-carousel__controls">
+              <button type="button" onClick={previousDevice} aria-label="Предыдущий аппарат">←</button>
+              <button type="button" onClick={nextDevice} aria-label="Следующий аппарат">→</button>
+            </div>
+          </div>
+        </div>
+      </article>
+      <div className="device-carousel__dots" aria-label="Выбрать аппарат">
+        {deviceCatalog.map((item, index) => <button className={index === currentDevice ? 'is-active' : ''} type="button" key={item.name} onClick={() => setCurrentDevice(index)} aria-label={item.name}>{item.number}</button>)}
+      </div>
+    </section>
+  );
+}
 
 const clinicGalleryPhotos = [
   ['clinic-entrance.jpg', 'Входная зона клиники Symmetria'],
@@ -126,6 +220,7 @@ function Home() {
     </section>
     <section className="statement"><p className="eyebrow">Наш подход</p><h2>Красота, в которой<br />вы <em>узнаёте себя.</em></h2><p>Мы не меняем лица — мы раскрываем их гармонию. Каждая программа создаётся врачом после внимательной диагностики и разговора о ваших желаниях.</p><Link className="text-link" to="/about">О философии Symmetria <b>→</b></Link></section>
     <section className="services-preview"><div className="section-heading"><div><p className="eyebrow">Направления</p><h2>Путь к вашей<br /><em>гармонии</em></h2></div><Link className="text-link" to="/services">Все услуги <b>→</b></Link></div><div className="service-grid">{services.map(([number, title, description], index) => <Link className={`service-card service-card--${index + 1}`} to="/services" key={number}><span>{number}</span><div><h3>{title}</h3><p>{description}</p><ArrowIcon /></div></Link>)}</div></section>
+    <DevicesCarousel />
     <section className="numbers"><div><strong>8</strong><span>лет бережной<br />практики</span></div><div><strong>4 000<sup>+</sup></strong><span>счастливых<br />пациентов</span></div><div><strong>15</strong><span>экспертных<br />врачей</span></div><div><strong>4.9</strong><span>рейтинг<br />пациентов</span></div></section>
     <section className="ritual"><div className="ritual__visual"><div className="arch" /><div className="sun" /><p>symmetria<br />is a feeling</p></div><div className="ritual__copy"><p className="eyebrow">Первый визит</p><h2>Ваш личный<br /><em>ритуал заботы</em></h2><ol>{[['01', 'Знакомство', 'Врач внимательно выслушает вас и ответит на все вопросы.'], ['02', 'Диагностика', 'Проведём анализ состояния кожи и черт лица.'], ['03', 'Персональный план', 'Составим комфортную программу с ясными этапами.']].map(([number, title, description]) => <li key={number}><span>{number}</span><div><b>{title}</b><p>{description}</p></div></li>)}</ol><BookLink className="button">Записаться на консультацию</BookLink></div></section>
     <section className="quote"><span>“</span><blockquote>Забота о себе начинается<br />с момента, когда вы выбираете<br /><em>слышать себя.</em></blockquote><p>— команда Symmetria</p></section>
@@ -158,6 +253,32 @@ function ServicesPage() {
           <div><h2>{title}</h2><p>{description}</p><strong className="service-list__price">{price}</strong></div>
           <ul>{items.map((item) => <li key={item}>{item}</li>)}</ul>
           <BookLink className="button service-list__button">Уточнить цену</BookLink>
+        </article>
+      ))}
+    </section>
+  </main>;
+}
+
+function DevicesPage() {
+  return <main className="inner devices-page">
+    <section className="page-hero devices-page__hero">
+      <p className="eyebrow">Аппараты Symmetria</p>
+      <h1>Технологии,<br /><em>подобранные</em> врачом.</h1>
+      <p>Современное оборудование помогает сделать программы ухода и эстетической коррекции более точными. Методика, зоны и количество процедур всегда определяются на консультации.</p>
+    </section>
+    <section className="devices-list" aria-label="Аппараты клиники Symmetria">
+      {deviceCatalog.map((device) => (
+        <article className="device-detail" key={device.name}>
+          <div className="device-detail__image"><img src={assetPath(device.image)} alt={`Аппарат ${device.name}`} /><span>{device.number}</span></div>
+          <div className="device-detail__content">
+            <p className="eyebrow">{device.brand}</p>
+            <h2>{device.name}</h2>
+            <p className="device-detail__lead">{device.shortDescription}</p>
+            <div className="device-detail__technology"><p className="eyebrow">Технология</p><p>{device.technology}</p></div>
+            <div className="device-detail__directions"><p className="eyebrow">Основные направления</p><ul>{device.directions.map((direction) => <li key={direction}>{direction}</li>)}</ul></div>
+            <p className="device-detail__note">Показания, противопоказания и ожидаемый результат врач оценивает индивидуально на очной консультации.</p>
+            <BookLink className="button">Записаться на консультацию</BookLink>
+          </div>
         </article>
       ))}
     </section>
@@ -408,7 +529,7 @@ function ContactsPage() {
 }
 
 function App() {
-  return <><Header /><Routes><Route path="/" element={<Home />} /><Route path="/services" element={<ServicesPage />} /><Route path="/about" element={<AboutPage />} /><Route path="/team" element={<TeamPage />} /><Route path="/contacts" element={<ContactsPage />} /></Routes><Footer /></>;
+  return <><Header /><Routes><Route path="/" element={<Home />} /><Route path="/services" element={<ServicesPage />} /><Route path="/devices" element={<DevicesPage />} /><Route path="/about" element={<AboutPage />} /><Route path="/team" element={<TeamPage />} /><Route path="/contacts" element={<ContactsPage />} /></Routes><Footer /></>;
 }
 
 export default App;
