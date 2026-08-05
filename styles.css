@@ -476,6 +476,7 @@ em {
   padding-bottom:85px;
 }
 .devices-list {
+  margin-top:55px;
   padding:0 5.6vw 110px;
 }
 .device-detail {
@@ -1586,6 +1587,7 @@ footer div {
     padding-bottom:55px;
   }
   .devices-list {
+    margin-top:30px;
     padding:0 20px 65px;
   }
   .device-detail,
